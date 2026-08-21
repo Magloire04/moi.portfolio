@@ -42,13 +42,17 @@ class Project extends Model
 
             if (! $project->hasCompleteTranslations()) {
                 throw ValidationException::withMessages([
-                    'status' => 'Impossible de publier : les champs FR et EN doivent être complets.',
+                    // Filament resource forms (CreateRecord/EditRecord) bind their
+                    // schema with ->statePath('data'), so a visible field's error
+                    // must be keyed 'data.<field>' to attach to it in the Livewire
+                    // error bag — a bare 'status' key lands nowhere the form shows.
+                    'data.status' => 'Impossible de publier : les champs FR et EN doivent être complets.',
                 ]);
             }
 
             if (blank($project->screenshots)) {
                 throw ValidationException::withMessages([
-                    'status' => "Impossible de publier : au moins une capture d'écran est requise.",
+                    'data.status' => "Impossible de publier : au moins une capture d'écran est requise.",
                 ]);
             }
         });
