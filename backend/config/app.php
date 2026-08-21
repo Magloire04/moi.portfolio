@@ -123,4 +123,16 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Email
+    |--------------------------------------------------------------------------
+    |
+    | The single email address allowed to access the Filament admin panel.
+    | Only a User whose email matches this value may sign in to /admin.
+    |
+    */
+
+    'admin_email' => env('ADMIN_EMAIL'),
+
 ];

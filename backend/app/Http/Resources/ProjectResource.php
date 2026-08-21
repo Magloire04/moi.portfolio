@@ -24,7 +24,7 @@ class ProjectResource extends JsonResource
             'liveUrl' => $this->live_url,
             'repoUrl' => $this->repo_url,
             'featured' => $this->featured,
-            'testimonials' => TestimonialResource::collection($this->whenLoaded('testimonials')),
+            'testimonials' => $this->whenLoaded('testimonials', fn () => TestimonialResource::collection($this->testimonials), []),
         ];
     }
 }

@@ -47,3 +47,12 @@ test('project show returns a 404 for a draft project', function () {
 
     $response->assertStatus(404);
 });
+
+test('projects index exposes testimonials as an empty array rather than omitting the key', function () {
+    Project::factory()->create();
+
+    $response = $this->getJson('/api/v1/projects');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.testimonials', []);
+});
