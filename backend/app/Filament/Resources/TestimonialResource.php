@@ -32,7 +32,8 @@ class TestimonialResource extends Resource
             Select::make('project_id')
                 ->label('Projet lié')
                 ->relationship('project', 'title_fr')
-                ->searchable(),
+                ->searchable()
+                ->required(),
             TextInput::make('author_name')->label('Nom')->required(),
             TextInput::make('author_role')->label('Fonction'),
             TextInput::make('author_company')->label('Entreprise'),
