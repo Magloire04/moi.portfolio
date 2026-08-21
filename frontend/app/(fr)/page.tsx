@@ -3,7 +3,7 @@ import { getProjects, getSettings } from '@/lib/api';
 
 export default async function HomeRoute() {
   const [{ data: featured }, settings] = await Promise.all([
-    getProjects({ category: 'produit_bytechnum' }),
+    getProjects({ limit: 100 }),
     getSettings(),
   ]);
 

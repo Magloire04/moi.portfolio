@@ -15,6 +15,25 @@ export class IncompleteProjectError extends Error {
   }
 }
 
+/**
+ * A backend-authored API error (a well-formed `{ error: { code, message, status } }`
+ * envelope). Safe to show `message` to a visitor. Any other failure (network error,
+ * invalid JSON, etc.) propagates as its original error type instead of becoming an
+ * ApiError, so callers can distinguish "the backend told us something" from
+ * "something went wrong before/outside the backend's response".
+ */
+export class ApiError extends Error {
+  code: string;
+  status: number;
+
+  constructor(code: string, message: string, status: number) {
+    super(message);
+    this.name = 'ApiError';
+    this.code = code;
+    this.status = status;
+  }
+}
+
 function validateProject(project: Project): void {
   const hasCompleteTranslations =
     Boolean(project.title.fr) &&
@@ -40,18 +59,24 @@ async function parseJsonOrThrow<T>(response: Response): Promise<T> {
 
   if (!response.ok) {
     const errorBody = body as ApiErrorBody;
-    throw new Error(errorBody.error?.message ?? `Request failed with status ${response.status}`);
+    if (errorBody?.error?.code && errorBody?.error?.message) {
+      throw new ApiError(errorBody.error.code, errorBody.error.message, response.status);
+    }
+    throw new Error(`Request failed with status ${response.status}`);
   }
 
   return body as T;
 }
 
 export async function getProjects(
-  params?: { category?: ProjectCategory },
+  params?: { category?: ProjectCategory; limit?: number },
 ): Promise<{ data: Project[]; meta: Meta }> {
   const url = new URL('/api/v1/projects', getApiBaseUrl());
   if (params?.category) {
     url.searchParams.set('category', params.category);
+  }
+  if (params?.limit) {
+    url.searchParams.set('limit', String(params.limit));
   }
 
   const response = await fetch(url.toString());
