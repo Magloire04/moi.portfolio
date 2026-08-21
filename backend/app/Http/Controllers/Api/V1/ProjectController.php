@@ -43,6 +43,7 @@ class ProjectController extends Controller
         $project = Project::query()
             ->where('slug', $slug)
             ->where('status', ProjectStatus::Publie)
+            ->with(['testimonials' => fn ($query) => $query->where('visible', true)])
             ->first();
 
         if (! $project) {
