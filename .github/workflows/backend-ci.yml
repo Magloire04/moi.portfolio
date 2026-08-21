@@ -3,10 +3,10 @@ name: Backend CI
 on:
   pull_request:
     branches: [main, develop]
-    paths: ['backend/**']
+    paths: ['backend/**', '.github/workflows/backend-ci.yml']
   push:
     branches: [main, develop]
-    paths: ['backend/**']
+    paths: ['backend/**', '.github/workflows/backend-ci.yml']
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.4'
           extensions: mbstring, sqlite3, pdo_sqlite
 
       - name: Install dependencies

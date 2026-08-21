@@ -1,5 +1,6 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import {
+  ApiError,
   getProjects,
   getProject,
   getSettings,
@@ -126,15 +127,29 @@ describe('submitContactMessage', () => {
     expect(result.received).toBe(true);
   });
 
-  it('throws with the API error message on a 422', async () => {
+  it('throws an ApiError with the backend message and code on a 422', async () => {
     mockFetchOnce(
       { error: { code: 'VALIDATION_ERROR', message: "L'email est invalide.", status: 422 } },
       422,
     );
 
-    await expect(
-      submitContactMessage({ name: '', email: 'x', message: '', locale: 'fr' }),
-    ).rejects.toThrow("L'email est invalide.");
+    const promise = submitContactMessage({ name: '', email: 'x', message: '', locale: 'fr' });
+
+    await expect(promise).rejects.toThrow("L'email est invalide.");
+    await expect(promise).rejects.toBeInstanceOf(ApiError);
+    await promise.catch((error: ApiError) => {
+      expect(error.code).toBe('VALIDATION_ERROR');
+      expect(error.status).toBe(422);
+    });
+  });
+
+  it('throws a plain Error (not an ApiError) when a non-ok response has no valid error envelope', async () => {
+    mockFetchOnce({}, 500);
+
+    const promise = submitContactMessage({ name: 'A', email: 'a@b.com', message: 'Hi', locale: 'fr' });
+
+    await expect(promise).rejects.toThrow();
+    await expect(promise).rejects.not.toBeInstanceOf(ApiError);
   });
 });
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { submitContactMessage } from '@/lib/api';
+import { ApiError, submitContactMessage } from '@/lib/api';
 import type { Locale } from '@/lib/types';
 
 const COPY = {
@@ -14,6 +14,11 @@ const COPY = {
     submitting: 'Envoi en cours…',
     success: 'Message envoyé — je vous réponds rapidement.',
     genericError: "Une erreur est survenue, réessayez dans un instant.",
+    validation: {
+      required: 'Ce champ est requis.',
+      invalidEmail: 'Adresse e-mail invalide.',
+      tooLong: 'Ce champ est trop long.',
+    },
   },
   en: {
     name: 'Name',
@@ -24,10 +29,50 @@ const COPY = {
     submitting: 'Sending…',
     success: "Message sent — I'll get back to you shortly.",
     genericError: 'Something went wrong, please try again in a moment.',
+    validation: {
+      required: 'This field is required.',
+      invalidEmail: 'Invalid email address.',
+      tooLong: 'This field is too long.',
+    },
   },
 } as const;
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
+
+// Basic shape check only — not a full RFC 5322 validator. Just needs to catch the
+// obviously-invalid case the native `type="email"` constraint used to catch before
+// `noValidate` disabled it.
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type ContactFormValues = {
+  name: string;
+  email: string;
+  message: string;
+  projectInterest?: string;
+};
+
+type ValidationCopy = { required: string; invalidEmail: string; tooLong: string };
+
+/**
+ * Client-side mirror of the backend's `StoreContactMessageRequest` rules (see
+ * backend/openapi.yaml). Runs before the API call so a visitor gets instant feedback
+ * without a round trip; the backend remains the authoritative validator regardless.
+ */
+function validateContactForm(values: ContactFormValues, copy: ValidationCopy): string | null {
+  if (!values.name.trim()) return copy.required;
+  if (values.name.length > 120) return copy.tooLong;
+
+  if (!values.email.trim()) return copy.required;
+  if (values.email.length > 180) return copy.tooLong;
+  if (!EMAIL_PATTERN.test(values.email)) return copy.invalidEmail;
+
+  if (!values.message.trim()) return copy.required;
+  if (values.message.length > 5000) return copy.tooLong;
+
+  if (values.projectInterest && values.projectInterest.length > 120) return copy.tooLong;
+
+  return null;
+}
 
 export function ContactForm({ locale }: { locale: Locale }) {
   const copy = COPY[locale];
@@ -39,25 +84,45 @@ export function ContactForm({ locale }: { locale: Locale }) {
     // Capture the form element synchronously: React nulls out event.currentTarget
     // once the handler yields (e.g. across an `await`), so it must not be read afterward.
     const formElement = event.currentTarget;
+
+    const form = new FormData(formElement);
+    const values = {
+      name: String(form.get('name') ?? ''),
+      email: String(form.get('email') ?? ''),
+      message: String(form.get('message') ?? ''),
+      projectInterest: String(form.get('projectInterest') ?? '') || undefined,
+      website: String(form.get('website') ?? ''),
+    };
+
+    // Client-side validation (see validateContactForm above). Runs before any network
+    // call so an obviously-invalid submission never reaches the API.
+    const validationError = validateContactForm(values, copy.validation);
+    if (validationError) {
+      setStatus('error');
+      setErrorMessage(validationError);
+      return;
+    }
+
     setStatus('submitting');
     setErrorMessage('');
 
-    const form = new FormData(formElement);
-
     try {
       await submitContactMessage({
-        name: String(form.get('name') ?? ''),
-        email: String(form.get('email') ?? ''),
-        message: String(form.get('message') ?? ''),
-        projectInterest: String(form.get('projectInterest') ?? '') || undefined,
+        name: values.name,
+        email: values.email,
+        message: values.message,
+        projectInterest: values.projectInterest,
         locale,
-        website: String(form.get('website') ?? ''),
+        website: values.website,
       });
       setStatus('success');
       formElement.reset();
     } catch (error) {
       setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : copy.genericError);
+      // Only an ApiError carries a backend-authored, visitor-safe message. Anything
+      // else (network failure, non-JSON response, etc.) falls back to a generic,
+      // localized message rather than leaking a raw TypeError/SyntaxError.
+      setErrorMessage(error instanceof ApiError ? error.message : copy.genericError);
     }
   }
 

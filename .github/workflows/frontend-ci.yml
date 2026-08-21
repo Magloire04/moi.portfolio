@@ -3,10 +3,10 @@ name: Frontend CI
 on:
   pull_request:
     branches: [main, develop]
-    paths: ['frontend/**']
+    paths: ['frontend/**', '.github/workflows/frontend-ci.yml']
   push:
     branches: [main, develop]
-    paths: ['frontend/**']
+    paths: ['frontend/**', '.github/workflows/frontend-ci.yml']
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.4'
           extensions: mbstring, sqlite3, pdo_sqlite
 
       - name: Prepare the backend as a live fixture API
@@ -33,7 +33,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
