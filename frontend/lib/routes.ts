@@ -1,5 +1,8 @@
 import type { Locale } from './types';
 
+/** Production origin for the static export (see docs/superpowers/specs — `moi.bytechnum.com`). */
+export const SITE_URL = 'https://moi.bytechnum.com';
+
 const FR_TO_EN_SEGMENT: Record<string, string> = {
   services: 'services',
   projets: 'projects',
