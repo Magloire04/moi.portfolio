@@ -1,13 +1,11 @@
 # Conventions de contribution — moi.portfolio
 
-Ce projet suit les standards ASIN (dev, sécurité, Git/PR) tels qu'enseignés en formation interne
-(juin 2026). Deux écarts documentés ci-dessous, imposés par le contexte solo de ce projet
-personnel (pas de Jira, pas de second développeur) — conformément au principe ASIN
-*« tout écart documenté est une décision, pas un oubli »*.
+Ce projet suit des standards enseignés. Deux écarts documentés ci-dessous, imposés par le contexte solo de ce projet
+personnel
 
 ## Écart 1 — Numérotation des tickets
 
-La convention ASIN impose `feature/ASIN-{numéro}-{description}`, le numéro traçant un ticket
+La convention impose `feature/PROJET-{numéro}-{description}`, le numéro traçant un ticket
 Jira. Ce projet n'a pas de Jira : les **issues GitHub de ce dépôt** en tiennent lieu.
 
 - Une tâche = une issue GitHub, puis une branche formatée `type/PORTFOLIO-{numéro-issue}-{description-kebab-case}`
@@ -16,7 +14,7 @@ Jira. Ce projet n'a pas de Jira : les **issues GitHub de ce dépôt** en tiennen
 
 ## Écart 2 — Revue de code & merge
 
-La convention ASIN interdit de merger sa propre PR (sauf urgence validée par un lead) et exige
+La convention interdit de merger sa propre PR (sauf urgence validée par un lead) et exige
 1 à 2 reviewers désignés. Projet solo : il n'existe structurellement pas d'autre développeur.
 
 - Toujours passer par une PR (jamais de commit direct sur `main` ou `develop`) — c'est ce qui
