@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: moi.bytechnum.com API
+  version: "1.0"
+  description: API publique consommée par le frontend Next.js du portfolio ByTechnum.
+servers:
+  - url: https://moi.bytechnum.com/api
+paths:
+  /v1/projects:
+    get:
+      summary: Liste des projets publiés
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20, maximum: 100 }
+        - name: category
+          in: query
+          schema: { type: string, enum: [produit_bytechnum, mandat_client] }
+      responses:
+        "200":
+          description: Liste paginée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: "#/components/schemas/Project" }
+                  meta: { $ref: "#/components/schemas/Meta" }
+  /v1/projects/{slug}:
+    get:
+      summary: Détail d'un projet publié
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Projet trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: "#/components/schemas/Project" }
+        "404":
+          description: Projet introuvable ou non publié
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+  /v1/settings:
+    get:
+      summary: Réglages publics (disponibilité)
+      responses:
+        "200":
+          description: Réglages courants
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      availableForWork: { type: boolean }
+  /v1/contact-messages:
+    post:
+      summary: Envoi d'un message de contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, message]
+              properties:
+                name: { type: string, maxLength: 120 }
+                email: { type: string, format: email, maxLength: 180 }
+                message: { type: string, maxLength: 5000 }
+                projectInterest: { type: string, maxLength: 120, nullable: true }
+                locale: { type: string, enum: [fr, en] }
+      responses:
+        "201":
+          description: Message reçu (aussi renvoyé silencieusement si le honeypot est rempli)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      received: { type: boolean }
+        "422":
+          description: Validation échouée
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+        "429":
+          description: Trop de requêtes (limite de 5 par minute par IP)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+components:
+  schemas:
+    LocalizedText:
+      type: object
+      properties:
+        fr: { type: string }
+        en: { type: string }
+    Project:
+      type: object
+      properties:
+        id: { type: string }
+        slug: { type: string }
+        category: { type: string, enum: [produit_bytechnum, mandat_client] }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        tagline: { $ref: "#/components/schemas/LocalizedText" }
+        summary: { $ref: "#/components/schemas/LocalizedText" }
+        body: { $ref: "#/components/schemas/LocalizedText" }
+        clientName: { type: string, nullable: true }
+        stack:
+          type: array
+          items: { type: string }
+        role: { type: string, nullable: true }
+        screenshots:
+          type: array
+          items: { type: string }
+        liveUrl: { type: string, nullable: true }
+        repoUrl: { type: string, nullable: true }
+        featured: { type: boolean }
+        testimonials:
+          type: array
+          items: { $ref: "#/components/schemas/Testimonial" }
+    Testimonial:
+      type: object
+      properties:
+        id: { type: string }
+        authorName: { type: string }
+        authorRole: { type: string, nullable: true }
+        authorCompany: { type: string, nullable: true }
+        quote: { $ref: "#/components/schemas/LocalizedText" }
+    Meta:
+      type: object
+      properties:
+        page: { type: integer }
+        limit: { type: integer }
+        total: { type: integer }
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            status: { type: integer }
