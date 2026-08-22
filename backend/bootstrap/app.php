@@ -13,6 +13,15 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
+        // Locally and in tests this app serves from its own document root, so
+        // the default 'api' prefix is what makes /api/v1/... routes resolve.
+        // In production this app is reached through a symlink nested at
+        // moi.bytechnum.com/api/, so Laravel's own base-path detection
+        // already strips /api before routing — adding the framework's
+        // automatic prefix on top would require /api/api/v1/... instead.
+        // API_ROUTE_PREFIX=(empty) in the production .env removes the
+        // duplicate prefix without touching local/test behavior.
+        apiPrefix: env('API_ROUTE_PREFIX', 'api'),
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
