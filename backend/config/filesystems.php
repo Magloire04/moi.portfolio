@@ -38,9 +38,16 @@ return [
             'report' => false,
         ],
 
+        // Locally and in tests this stays Laravel's default
+        // storage_path('app/public'), served via the storage:link symlink.
+        // In production this app is nested at moi.bytechnum.com/api/ and
+        // the web server there does not follow symlinks placed inside a
+        // real document root, so PUBLIC_DISK_ROOT points this disk at a
+        // real directory under that document root instead — uploads land
+        // exactly where they're served from, no symlink involved.
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => env('PUBLIC_DISK_ROOT', storage_path('app/public')),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,
