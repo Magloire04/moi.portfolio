@@ -41,7 +41,13 @@ return Application::configure(basePath: dirname(__DIR__))
         // validation failures, throttling, unknown routes, and 500s all fell
         // through to Laravel's default (differently-shaped) JSON error body.
         $exceptions->render(function (Throwable $e, Request $request) {
-            if (! $request->is('api/*')) {
+            // Every non-admin, non-health route in this app is an API route —
+            // but which literal path segment that means depends on apiPrefix
+            // above ('api/*' locally and in tests, no prefix at all once the
+            // physical /api nesting in production has already been stripped
+            // by Laravel's base-path detection). Excluding the admin panel
+            // and the health check is what stays true in both cases.
+            if ($request->is('admin/*') || $request->is('up') || $request->is('/')) {
                 return null;
             }
 
