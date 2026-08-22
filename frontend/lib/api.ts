@@ -118,5 +118,16 @@ export async function submitContactMessage(
 }
 
 export function getScreenshotUrl(path: string): string {
-  return new URL(`/storage/${path}`, getApiBaseUrl()).toString();
+  // Unlike the /api/v1/... calls above, this must NOT use `new URL(leadingSlashPath, base)`:
+  // that constructor discards the base's own path entirely once the relative reference starts
+  // with `/`, which is exactly what the /api/v1/... calls want (their explicit "/api/..." already
+  // replaces whatever base path there is) but is wrong here. Storage has no such fixed prefix of
+  // its own: locally NEXT_PUBLIC_API_BASE_URL is the app's own bare origin (storage:link serves
+  // from that root, e.g. http://localhost:8000/storage/...), while in production it already
+  // includes the real "/api" the app is physically nested under (see PUBLIC_DISK_ROOT in
+  // backend/config/filesystems.php), so storage there is under THAT same root instead
+  // (https://moi.bytechnum.com/api/storage/...). A plain concatenation preserves either base's
+  // path as-is, which is what both cases need.
+  const base = getApiBaseUrl().replace(/\/$/, '');
+  return `${base}/storage/${path}`;
 }

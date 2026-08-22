@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — "carnet vérifié" system.
+ * Light by default (paper), full dark variant via prefers-color-scheme.
+ * Named per the validated design system: Paper/Ink/Slate are neutrals,
+ * Signet/Bloom are the two accents (serious/verified vs. playful register),
+ * Mist is the hairline/border neutral.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-paper: #f6f7f5;
+  --color-ink: #12161c;
+  --color-slate: #5b6472;
+  --color-signet: #0e7c74;
+  --color-signet-soft: #0e7c7414;
+  --color-bloom: #d95b77;
+  --color-bloom-soft: #d95b7714;
+  --color-mist: #e4e7e2;
+  --color-error: #b3261e;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #12161c;
+    --color-ink: #f1f3ef;
+    --color-slate: #9aa3af;
+    --color-signet: #4fd8c9;
+    --color-signet-soft: #4fd8c91f;
+    --color-bloom: #f08fa3;
+    --color-bloom-soft: #f08fa31f;
+    --color-mist: #262c34;
+
+    --background: var(--color-paper);
+    --foreground: var(--color-ink);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
-  --font-mono: var(--font-geist-mono, ui-monospace, "SFMono-Regular", Menlo, monospace);
-}
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-slate: var(--color-slate);
+  --color-signet: var(--color-signet);
+  --color-signet-soft: var(--color-signet-soft);
+  --color-bloom: var(--color-bloom);
+  --color-bloom-soft: var(--color-bloom-soft);
+  --color-mist: var(--color-mist);
+  --color-error: var(--color-error);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-display-raw), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-raw), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-raw), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Visible keyboard focus everywhere, using the primary accent — never suppressed. */
+:focus-visible {
+  outline: 2px solid var(--color-signet);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Shared, sober transition timing for hover/focus states site-wide. */
+* {
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

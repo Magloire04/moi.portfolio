@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { fontVariables } from '@/lib/fonts';
 import { SITE_URL, STATIC_PAGE_PATH_PAIRS, toLanguageAlternates } from '@/lib/routes';
 import '../globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ByTechnum — Elisée Atonde, développeur full-stack',
+    default: 'ByTechnum, Elisée Atonde, développeur full-stack',
     template: '%s | ByTechnum',
   },
   description:
@@ -21,10 +22,10 @@ export const metadata: Metadata = {
 
 export default function FrenchRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body>
+    <html lang="fr" className={fontVariables}>
+      <body className="flex min-h-screen flex-col antialiased">
         <Header locale="fr" />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer locale="fr" />
       </body>
     </html>

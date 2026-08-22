@@ -157,4 +157,17 @@ describe('getScreenshotUrl', () => {
   it('builds an absolute URL from a storage-relative path', () => {
     expect(getScreenshotUrl('projects/shot.png')).toBe('https://api.test/storage/projects/shot.png');
   });
+
+  it('preserves a non-empty base path instead of discarding it (production topology)', () => {
+    // Regression test: production's NEXT_PUBLIC_API_BASE_URL is
+    // https://moi.bytechnum.com/api (the app is physically nested under /api there — see
+    // PUBLIC_DISK_ROOT in backend/config/filesystems.php). `new URL('/storage/...', base)`
+    // would silently discard that "/api" segment since the relative reference starts with
+    // "/", producing a 404. Plain concatenation must keep it.
+    vi.stubEnv('NEXT_PUBLIC_API_BASE_URL', 'https://moi.bytechnum.com/api');
+
+    expect(getScreenshotUrl('projects/shot.png')).toBe(
+      'https://moi.bytechnum.com/api/storage/projects/shot.png',
+    );
+  });
 });

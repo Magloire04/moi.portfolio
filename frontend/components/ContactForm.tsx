@@ -12,7 +12,7 @@ const COPY = {
     projectInterest: 'Projet concerné (optionnel)',
     submit: 'Envoyer',
     submitting: 'Envoi en cours…',
-    success: 'Message envoyé — je vous réponds rapidement.',
+    success: 'Message envoyé, je vous réponds rapidement.',
     genericError: "Une erreur est survenue, réessayez dans un instant.",
     validation: {
       required: 'Ce champ est requis.',
@@ -27,7 +27,7 @@ const COPY = {
     projectInterest: 'Project of interest (optional)',
     submit: 'Send',
     submitting: 'Sending…',
-    success: "Message sent — I'll get back to you shortly.",
+    success: "Message sent, I'll get back to you shortly.",
     genericError: 'Something went wrong, please try again in a moment.',
     validation: {
       required: 'This field is required.',
@@ -127,33 +127,37 @@ export function ContactForm({ locale }: { locale: Locale }) {
   }
 
   if (status === 'success') {
-    return <p role="status">{copy.success}</p>;
+    return <p role="status" className="text-lg text-signet">{copy.success}</p>;
   }
+
+  const fieldClassName =
+    'mt-1.5 w-full rounded-md border border-mist bg-transparent px-3 py-2 text-ink outline-none transition-colors focus:border-signet';
+  const labelClassName = 'block font-mono text-xs uppercase tracking-wide text-slate';
 
   return (
     // noValidate: the backend is the authoritative validator (see backend/openapi.yaml) and
     // returns human-readable error messages we display ourselves; without this, the browser's
     // native constraint validation on the `type="email"` field silently blocks the submit event
     // for an invalid address, so our own error UI would never get a chance to show.
-    <form onSubmit={handleSubmit} noValidate className="space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium">{copy.name}</label>
-        <input id="name" name="name" type="text" required maxLength={120} className="mt-1 w-full rounded border border-slate-300 px-3 py-2" />
+        <label htmlFor="name" className={labelClassName}>{copy.name}</label>
+        <input id="name" name="name" type="text" required maxLength={120} className={fieldClassName} />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium">{copy.email}</label>
-        <input id="email" name="email" type="email" required maxLength={180} className="mt-1 w-full rounded border border-slate-300 px-3 py-2" />
+        <label htmlFor="email" className={labelClassName}>{copy.email}</label>
+        <input id="email" name="email" type="email" required maxLength={180} className={fieldClassName} />
       </div>
 
       <div>
-        <label htmlFor="projectInterest" className="block text-sm font-medium">{copy.projectInterest}</label>
-        <input id="projectInterest" name="projectInterest" type="text" maxLength={120} className="mt-1 w-full rounded border border-slate-300 px-3 py-2" />
+        <label htmlFor="projectInterest" className={labelClassName}>{copy.projectInterest}</label>
+        <input id="projectInterest" name="projectInterest" type="text" maxLength={120} className={fieldClassName} />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium">{copy.message}</label>
-        <textarea id="message" name="message" required maxLength={5000} rows={6} className="mt-1 w-full rounded border border-slate-300 px-3 py-2" />
+        <label htmlFor="message" className={labelClassName}>{copy.message}</label>
+        <textarea id="message" name="message" required maxLength={5000} rows={6} className={fieldClassName} />
       </div>
 
       {/* Honeypot: invisible to a human visitor (off-screen, unreachable by keyboard tab order,
@@ -169,13 +173,13 @@ export function ContactForm({ locale }: { locale: Locale }) {
       />
 
       {status === 'error' && (
-        <p role="alert" className="text-sm text-red-600">{errorMessage}</p>
+        <p role="alert" className="text-sm text-error">{errorMessage}</p>
       )}
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="rounded bg-slate-900 px-5 py-2.5 text-white disabled:opacity-50"
+        className="rounded-full bg-signet px-5 py-2.5 font-medium text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'submitting' ? copy.submitting : copy.submit}
       </button>
