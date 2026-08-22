@@ -1,17 +1,32 @@
+import type { ProjectAccent } from '@/lib/accent';
 import type { Locale, Testimonial } from '@/lib/types';
 
-export function TestimonialQuote({ testimonial, locale }: { testimonial: Testimonial; locale: Locale }) {
+export function TestimonialQuote({
+  testimonial,
+  locale,
+  accent = 'signet',
+}: {
+  testimonial: Testimonial;
+  locale: Locale;
+  accent?: ProjectAccent;
+}) {
+  const accentText = accent === 'signet' ? 'text-signet' : 'text-bloom';
+
   return (
-    <blockquote className="border-l-2 border-slate-300 pl-4">
-      <p className="italic text-slate-700">
-        <span aria-hidden="true">&ldquo;</span>
+    <blockquote className="border-l-2 border-mist pl-5">
+      <p className="text-lg text-ink">
+        <span aria-hidden="true" className={`font-display ${accentText}`}>
+          &ldquo;
+        </span>
         {testimonial.quote[locale]}
-        <span aria-hidden="true">&rdquo;</span>
+        <span aria-hidden="true" className={`font-display ${accentText}`}>
+          &rdquo;
+        </span>
       </p>
-      <footer className="mt-2 text-sm text-slate-500">
+      <footer className="mt-2 font-mono text-xs text-slate">
         <span>{testimonial.authorName}</span>
         {testimonial.authorRole && <span>, {testimonial.authorRole}</span>}
-        {testimonial.authorCompany && <span> — {testimonial.authorCompany}</span>}
+        {testimonial.authorCompany && <span>, {testimonial.authorCompany}</span>}
       </footer>
     </blockquote>
   );

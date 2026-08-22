@@ -1,4 +1,4 @@
-import type { Locale, LocalizedText } from '@/lib/types';
+import type { LocalizedText } from '@/lib/types';
 
 export interface Service {
   id: string;
@@ -19,8 +19,8 @@ export const services: Service[] = [
     id: 'progressive-web-apps',
     title: { fr: 'Applications web progressives (PWA)', en: 'Progressive web apps' },
     description: {
-      fr: 'Applications installables, utilisables hors-ligne, pensées pour des contextes de connexion instable — un standard technique appliqué à chaque produit ByTechnum public.',
-      en: 'Installable, offline-capable applications built for unreliable connectivity — a technical standard applied to every public ByTechnum product.',
+      fr: 'Applications installables, utilisables hors-ligne, pensées pour des contextes de connexion instable : un standard technique appliqué à chaque produit ByTechnum public.',
+      en: 'Installable, offline-capable applications built for unreliable connectivity: a technical standard applied to every public ByTechnum product.',
     },
   },
   {
@@ -28,7 +28,7 @@ export const services: Service[] = [
     title: { fr: 'Conformité données personnelles (APDP)', en: 'Data-protection compliance (APDP)' },
     description: {
       fr: "Traitement des données personnelles conforme à la loi béninoise n°2017-20 (APDP) : minimisation des champs, consentement explicite, cité et appliqué dans plusieurs projets en production.",
-      en: "Personal-data handling aligned with Benin's data-protection law (n°2017-20, APDP): field minimization, explicit consent — applied and cited across several production projects.",
+      en: "Personal-data handling aligned with Benin's data-protection law (n°2017-20, APDP): field minimization, explicit consent, applied and cited across several production projects.",
     },
   },
   {
@@ -36,7 +36,7 @@ export const services: Service[] = [
     title: { fr: 'Certification numérique & traçabilité', en: 'Digital certification & traceability' },
     description: {
       fr: 'Signature cryptographique réelle (ECDSA), vérification publique par QR code, pour rendre une chaîne de production ou une transaction vérifiable sans base de données centrale interrogeable.',
-      en: 'Real cryptographic signing (ECDSA), public QR-code verification — making a production chain or a transaction verifiable without exposing a queryable central database.',
+      en: 'Real cryptographic signing (ECDSA), public QR-code verification: making a production chain or a transaction verifiable without exposing a queryable central database.',
     },
   },
   {
@@ -51,8 +51,8 @@ export const services: Service[] = [
     id: 'admin-backoffice',
     title: { fr: "Back-office & tableaux de bord d'administration", en: 'Admin back-offices & dashboards' },
     description: {
-      fr: "Interfaces d'administration complètes (Filament/Laravel) pour gérer du contenu, suivre des statistiques, traiter des demandes — sans dépendre de vous pour chaque mise à jour.",
-      en: 'Full admin interfaces (Filament/Laravel) to manage content, track statistics, and process requests — without needing a developer for every routine update.',
+      fr: "Interfaces d'administration complètes (Filament/Laravel) pour gérer du contenu, suivre des statistiques, traiter des demandes, sans dépendre de vous pour chaque mise à jour.",
+      en: 'Full admin interfaces (Filament/Laravel) to manage content, track statistics, and process requests, without needing a developer for every routine update.',
     },
   },
 ];
