@@ -15,13 +15,19 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         // Locally and in tests this app serves from its own document root, so
         // the default 'api' prefix is what makes /api/v1/... routes resolve.
-        // In production this app is reached through a symlink nested at
-        // moi.bytechnum.com/api/, so Laravel's own base-path detection
-        // already strips /api before routing — adding the framework's
-        // automatic prefix on top would require /api/api/v1/... instead.
-        // API_ROUTE_PREFIX=(empty) in the production .env removes the
-        // duplicate prefix without touching local/test behavior.
-        apiPrefix: env('API_ROUTE_PREFIX', 'api'),
+        // In production this app is physically nested at moi.bytechnum.com/api/,
+        // so Laravel's own base-path detection already strips /api before
+        // routing — adding the framework's automatic prefix on top would
+        // require /api/api/v1/... instead.
+        // This can't be driven by an env var: this array is built while
+        // bootstrap/app.php itself is being required, which happens before
+        // $app->handleRequest() runs the bootstrapper that loads .env — so
+        // env() here always sees an empty environment and silently falls
+        // back to its default, no matter what .env says. $_SERVER is
+        // populated by the SAPI before any of this file runs, so detecting
+        // the nesting from the invoked script's own path is what actually
+        // works.
+        apiPrefix: str_starts_with($_SERVER['SCRIPT_NAME'] ?? '', '/api/') ? '' : 'api',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
