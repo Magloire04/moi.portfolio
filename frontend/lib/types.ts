@@ -5,7 +5,7 @@ export interface LocalizedText {
   en: string;
 }
 
-export type ProjectCategory = 'produit_bytechnum' | 'mandat_client';
+export type ProjectCategory = 'produit_bytechnum' | 'mandat_client' | 'projet_equipe';
 
 export interface Testimonial {
   id: string;

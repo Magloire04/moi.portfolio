@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getScreenshotUrl } from '@/lib/api';
-import { getProjectAccent } from '@/lib/accent';
+import { getProjectAccent, getProjectKicker } from '@/lib/accent';
 import { getDictionary } from '@/content/i18n';
 import type { Locale, Project } from '@/lib/types';
 
@@ -41,7 +41,7 @@ export function FeaturedProjectShowcase({
 
       <div className="flex flex-col justify-center sm:col-span-2">
         <p className={`font-mono text-xs uppercase tracking-wide ${accentText}`}>
-          {project.category === 'produit_bytechnum' ? 'ByTechnum' : project.clientName ?? ''}
+          {getProjectKicker(project, locale)}
         </p>
         <h3 className="mt-2 font-display text-2xl font-semibold">
           <Link href={href} className="hover:underline">

@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: moi.bytechnum.com API
   version: "1.0"
-  description: API publique consommée par le frontend Next.js du portfolio ByTechnum.
+  description: API publique consommée par le frontend Next.js du portfolio TECHNUM.
 servers:
   - url: https://moi.bytechnum.com/api
 paths:
@@ -18,7 +18,7 @@ paths:
           schema: { type: integer, default: 20, maximum: 100 }
         - name: category
           in: query
-          schema: { type: string, enum: [produit_bytechnum, mandat_client] }
+          schema: { type: string, enum: [produit_bytechnum, mandat_client, projet_equipe] }
       responses:
         "200":
           description: Liste paginée
@@ -118,7 +118,7 @@ components:
       properties:
         id: { type: string }
         slug: { type: string }
-        category: { type: string, enum: [produit_bytechnum, mandat_client] }
+        category: { type: string, enum: [produit_bytechnum, mandat_client, projet_equipe] }
         title: { $ref: "#/components/schemas/LocalizedText" }
         tagline: { $ref: "#/components/schemas/LocalizedText" }
         summary: { $ref: "#/components/schemas/LocalizedText" }

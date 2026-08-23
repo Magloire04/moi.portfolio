@@ -7,8 +7,8 @@ export interface MethodPoint {
 }
 
 export const bio: LocalizedText = {
-  fr: "Je suis développeur full-stack, basé au Bénin, et je conçois des applications pour des clients institutionnels et privés en Afrique de l'Ouest sous la marque ByTechnum. Mon terrain de jeu principal est Laravel/PHP, avec une bascule récente vers React et TypeScript pour les produits les plus récents : Dis oui, TraçaCajou, l'estimateur de bourse « where ». Je m'intéresse particulièrement aux projets qui touchent à l'infrastructure : identité numérique décentralisée, certification cryptographique, paiements de masse.",
-  en: "I'm a full-stack developer based in Benin, building applications for institutional and private clients across West Africa under the ByTechnum brand. My core stack is Laravel/PHP, with a recent shift to React and TypeScript for the newest products: Dis oui, TraçaCajou, the \"where\" scholarship estimator. I'm especially drawn to infrastructure-adjacent work: decentralized digital identity, cryptographic certification, mass payments.",
+  fr: "Je suis développeur full-stack, basé au Bénin, et je conçois des applications pour des clients institutionnels et privés en Afrique de l'Ouest sous la marque TECHNUM. Mon terrain de jeu principal est Laravel/PHP, avec une bascule récente vers React et TypeScript pour les produits les plus récents : Dis oui, TraçaCajou, Après mon bac. Je m'intéresse particulièrement aux projets qui touchent à l'infrastructure : identité numérique décentralisée, certification cryptographique, paiements de masse.",
+  en: "I'm a full-stack developer based in Benin, building applications for institutional and private clients across West Africa under the TECHNUM brand. My core stack is Laravel/PHP, with a recent shift to React and TypeScript for the newest products: Dis oui, TraçaCajou, Après mon bac. I'm especially drawn to infrastructure-adjacent work: decentralized digital identity, cryptographic certification, mass payments.",
 };
 
 export const methodPoints: MethodPoint[] = [
