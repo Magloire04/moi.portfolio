@@ -3,8 +3,8 @@ import type { Locale } from '@/lib/types';
 
 const HEADING = { fr: 'Services', en: 'Services' };
 const INTRO = {
-  fr: 'Ce que ByTechnum livre concrètement : pas une liste de mots-clés, mais les compétences appliquées sur les projets présentés dans le portfolio.',
-  en: 'What ByTechnum actually delivers: not a buzzword list, but the skills applied across the projects shown in this portfolio.',
+  fr: 'Ce que TECHNUM livre concrètement : pas une liste de mots-clés, mais les compétences appliquées sur les projets présentés dans le portfolio.',
+  en: 'What TECHNUM actually delivers: not a buzzword list, but the skills applied across the projects shown in this portfolio.',
 };
 
 export function ServicesPage({ locale }: { locale: Locale }) {

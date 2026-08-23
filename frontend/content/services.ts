@@ -19,8 +19,8 @@ export const services: Service[] = [
     id: 'progressive-web-apps',
     title: { fr: 'Applications web progressives (PWA)', en: 'Progressive web apps' },
     description: {
-      fr: 'Applications installables, utilisables hors-ligne, pensées pour des contextes de connexion instable : un standard technique appliqué à chaque produit ByTechnum public.',
-      en: 'Installable, offline-capable applications built for unreliable connectivity: a technical standard applied to every public ByTechnum product.',
+      fr: 'Applications installables, utilisables hors-ligne, pensées pour des contextes de connexion instable : un standard technique appliqué à chaque produit TECHNUM public.',
+      en: 'Installable, offline-capable applications built for unreliable connectivity: a technical standard applied to every public TECHNUM product.',
     },
   },
   {

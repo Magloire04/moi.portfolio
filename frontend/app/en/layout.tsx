@@ -8,8 +8,8 @@ import '../globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ByTechnum, Elisée Atonde, full-stack developer',
-    template: '%s | ByTechnum',
+    default: 'TECHNUM, Elisée Atonde, full-stack developer',
+    template: '%s | TECHNUM',
   },
   description:
     'Custom web development from Benin: management applications, digital identity, traceability, data-protection compliance.',

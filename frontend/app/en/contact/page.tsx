@@ -5,7 +5,7 @@ import { STATIC_PAGE_PATH_PAIRS, toLanguageAlternates } from '@/lib/routes';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with ByTechnum about a web application, APDP compliance, or digital-certification project.',
+    'Get in touch with TECHNUM about a web application, APDP compliance, or digital-certification project.',
   alternates: toLanguageAlternates(STATIC_PAGE_PATH_PAIRS.contact),
 };
 

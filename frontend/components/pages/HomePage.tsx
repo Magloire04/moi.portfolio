@@ -7,10 +7,10 @@ import type { Locale, Project, Settings } from '@/lib/types';
 
 const COPY = {
   fr: {
-    heroKicker: 'ByTechnum · Développeur full-stack · Bénin',
+    heroKicker: 'TECHNUM · Développeur full-stack · Bénin',
     heroHeadline: "Je construis des applications qu'on peut auditer, pas juste qu'on peut démontrer.",
     heroBody:
-      "ByTechnum conçoit des applications web sur-mesure pour des clients institutionnels et privés en Afrique de l'Ouest : gestion, identité numérique, traçabilité, conformité APDP.",
+      "TECHNUM conçoit des applications web sur-mesure pour des clients institutionnels et privés en Afrique de l'Ouest : gestion, identité numérique, traçabilité, conformité APDP.",
     featuredHeading: 'Projets phares',
     methodHeading: 'Une méthode, pas juste du code',
     contactHref: '/contact',
@@ -19,10 +19,10 @@ const COPY = {
     productsInProduction: (n: number) => `${n} produits en production`,
   },
   en: {
-    heroKicker: 'ByTechnum · Full-stack developer · Benin',
+    heroKicker: 'TECHNUM · Full-stack developer · Benin',
     heroHeadline: 'I build applications you can audit, not just ones you can demo.',
     heroBody:
-      'ByTechnum builds custom web applications for institutional and private clients across West Africa: management systems, digital identity, traceability, data-protection compliance.',
+      'TECHNUM builds custom web applications for institutional and private clients across West Africa: management systems, digital identity, traceability, data-protection compliance.',
     featuredHeading: 'Featured projects',
     methodHeading: 'A method, not just code',
     contactHref: '/en/contact',
