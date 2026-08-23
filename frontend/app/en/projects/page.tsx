@@ -6,7 +6,7 @@ import { STATIC_PAGE_PATH_PAIRS, toLanguageAlternates } from '@/lib/routes';
 export const metadata: Metadata = {
   title: 'Projects',
   description:
-    'Case studies from ByTechnum: in-house products and client mandates, from a digital-identity PoC to production management applications.',
+    'Case studies from TECHNUM: in-house products and client mandates, from a digital-identity PoC to production management applications.',
   alternates: toLanguageAlternates(STATIC_PAGE_PATH_PAIRS.projects),
 };
 

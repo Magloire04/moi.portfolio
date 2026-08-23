@@ -32,15 +32,22 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationLabel = 'Projets';
 
+    /**
+     * @return array<string, string>
+     */
+    private static function categoryOptions(): array
+    {
+        return collect(ProjectCategory::cases())
+            ->mapWithKeys(fn (ProjectCategory $category) => [$category->value => $category->label()])
+            ->all();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
             Section::make('Identité')->columns(2)->schema([
                 TextInput::make('slug')->required()->unique(ignoreRecord: true),
-                Select::make('category')->required()->options([
-                    ProjectCategory::ProduitBytechnum->value => 'Produit ByTechnum',
-                    ProjectCategory::MandatClient->value => 'Mandat client',
-                ]),
+                Select::make('category')->required()->options(self::categoryOptions()),
                 Select::make('status')->required()->default(ProjectStatus::Brouillon->value)->options([
                     ProjectStatus::Brouillon->value => 'Brouillon',
                     ProjectStatus::Publie->value => 'Publié',
@@ -91,10 +98,7 @@ class ProjectResource extends Resource
                 TextColumn::make('updated_at')->label('Modifié le')->dateTime('d/m/Y'),
             ])
             ->filters([
-                SelectFilter::make('category')->options([
-                    ProjectCategory::ProduitBytechnum->value => 'Produit ByTechnum',
-                    ProjectCategory::MandatClient->value => 'Mandat client',
-                ]),
+                SelectFilter::make('category')->options(self::categoryOptions()),
                 SelectFilter::make('status')->options([
                     ProjectStatus::Brouillon->value => 'Brouillon',
                     ProjectStatus::Publie->value => 'Publié',

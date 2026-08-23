@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getScreenshotUrl } from '@/lib/api';
-import { getProjectAccent } from '@/lib/accent';
+import { getProjectAccent, getProjectKicker } from '@/lib/accent';
 import { getDictionary } from '@/content/i18n';
 import { TestimonialQuote } from '@/components/TestimonialQuote';
 import type { Locale, Project } from '@/lib/types';
@@ -26,7 +26,7 @@ export function ProjectDetailPage({ locale, project }: { locale: Locale; project
 
       <header className="mt-6">
         <p className={`font-mono text-xs uppercase tracking-wide ${accentText}`}>
-          {project.category === 'produit_bytechnum' ? 'ByTechnum' : project.clientName ?? ''}
+          {getProjectKicker(project, locale)}
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">{project.title[locale]}</h1>
         <p className="mt-3 text-lg text-slate">{project.tagline[locale]}</p>

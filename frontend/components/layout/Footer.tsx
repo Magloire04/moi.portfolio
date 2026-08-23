@@ -11,7 +11,7 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-mist py-8">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 font-mono text-xs text-slate">
         <p>
-          ByTechnum, {year}. {dictionary.footer.rights}
+          TECHNUM, {year}. {dictionary.footer.rights}
         </p>
         <a
           href="https://github.com/Magloire04/moi.portfolio"

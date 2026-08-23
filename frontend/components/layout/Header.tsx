@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getAlternateHref } from '@/lib/routes';
@@ -38,8 +39,23 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-10 border-b border-mist bg-paper/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <Link href={hrefs.home} className="font-mono text-sm font-medium tracking-tight">
-          ByTechnum
+        <Link href={hrefs.home} className="shrink-0">
+          <Image
+            src="/logo.png"
+            alt="TECHNUM"
+            width={451}
+            height={120}
+            priority
+            className="block h-6 w-auto [@media(prefers-color-scheme:dark)]:hidden"
+          />
+          <Image
+            src="/logo-dark.png"
+            alt="TECHNUM"
+            width={451}
+            height={120}
+            priority
+            className="hidden h-6 w-auto [@media(prefers-color-scheme:dark)]:block"
+          />
         </Link>
 
         <ul className="hidden items-center gap-6 font-mono text-xs uppercase tracking-wide text-slate sm:flex">
