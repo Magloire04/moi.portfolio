@@ -1,22 +1,42 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — "carnet vérifié" system.
- * Light by default (paper), full dark variant via prefers-color-scheme.
- * Named per the validated design system: Paper/Ink/Slate are neutrals,
- * Signet/Bloom are the two accents (serious/verified vs. playful register),
- * Mist is the hairline/border neutral.
+ * Design tokens — charte TECHNUM v1 (2026).
+ * Les six couleurs officielles viennent directement du tableau de palette
+ * du brand book (p.10) ; tout le reste de ce fichier est soit un alias
+ * sémantique posé sur l'une de ces six valeurs, soit une dérivation
+ * documentée qui reste dans la même famille de teinte, conformément à la
+ * règle du livre ("la palette doit rester volontairement courte"). Clair
+ * par défaut (paper/off-white), variante sombre complète via
+ * prefers-color-scheme.
  */
 :root {
-  --color-paper: #f6f7f5;
-  --color-ink: #12161c;
-  --color-slate: #5b6472;
-  --color-signet: #0e7c74;
-  --color-signet-soft: #0e7c7414;
-  --color-bloom: #d95b77;
-  --color-bloom-soft: #d95b7714;
-  --color-mist: #e4e7e2;
-  --color-error: #b3261e;
+  /* --- Palette officielle (brand book, p.10) --- */
+  --color-charcoal: #373536;      /* TECHNUM Charcoal — texte, logo, fonds premium */
+  --color-blue: #405fe0;          /* TECHNUM Blue — accent, liens, CTA, numérique */
+  --color-blue-dark: #2846b9;     /* TECHNUM Blue Dark — états actifs, contrastes */
+  --color-ice: #e9edff;           /* Ice — fonds légers, cartes, surlignage */
+  --color-off-white: #f7f8fc;     /* Off White — fonds d'interface */
+  --color-white: #ffffff;         /* White — fonds et textes inversés */
+  /* Gris de bordure de carte, brand book p.14 ("carte = ... bordure #E5E7ED").
+     Absent du tableau p.10, mais explicitement donné pour cet usage précis. */
+  --color-border-gray: #e5e7ed;
+
+  /* --- Tokens sémantiques existants, aliasés sur la palette ci-dessus.
+     Les noms ne changent pas (bg-paper/text-ink/text-slate/border-mist
+     continuent de fonctionner partout) ; seule la valeur sous-jacente bouge. --- */
+  --color-paper: var(--color-off-white);
+  --color-ink: var(--color-charcoal);
+  /* Pas d'équivalent "gris de texte secondaire" dans le brand book — plutôt
+     que d'inventer un gris hors palette, dérivé comme Charcoal à opacité
+     réduite, conformément à la règle "palette courte". */
+  --color-slate: color-mix(in srgb, var(--color-charcoal) 68%, transparent);
+  --color-mist: var(--color-border-gray);
+  --color-error: #b3261e; /* inchangé — couleur fonctionnelle de validation, hors brand book, hors scope */
+
+  /* --- Accents renommés (avant : signet/bloom) --- */
+  --color-blue-soft: var(--color-ice); /* Ice EST l'usage "fonds légers/surlignage" de Blue selon le livre */
+  --color-blue-dark-soft: color-mix(in srgb, var(--color-blue-dark) 8%, transparent);
 
   --background: var(--color-paper);
   --foreground: var(--color-ink);
@@ -24,14 +44,28 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-paper: #12161c;
-    --color-ink: #f1f3ef;
-    --color-slate: #9aa3af;
-    --color-signet: #4fd8c9;
-    --color-signet-soft: #4fd8c91f;
-    --color-bloom: #f08fa3;
-    --color-bloom-soft: #f08fa31f;
-    --color-mist: #262c34;
+    /* Le brand book n'a pas de ligne "mode sombre" dans son tableau, mais la
+       p.8 anticipe les fonds sombres (variante claire "proposée" du logo).
+       Dérivé des mêmes tokens de marque : le fond sombre devient Charcoal
+       lui-même ("fonds premium" selon le livre), le texte passe en Off
+       White, et Blue reçoit un éclaircissement contrôlé pour le contraste
+       sur fond sombre (même teinte, même technique que l'ancien signet
+       #0e7c74 -> #4fd8c9 en sombre). */
+    --color-charcoal: #f7f8fc;
+    --color-blue: #8d9fec;
+    --color-blue-dark: #a9bbf7;
+    --color-ice: #262c3d;
+    --color-off-white: #373536;
+    --color-white: #373536;
+    --color-border-gray: #4a484a;
+
+    --color-paper: var(--color-off-white);
+    --color-ink: var(--color-charcoal);
+    --color-slate: color-mix(in srgb, var(--color-charcoal) 70%, transparent);
+    --color-mist: var(--color-border-gray);
+
+    --color-blue-soft: color-mix(in srgb, var(--color-blue) 14%, transparent);
+    --color-blue-dark-soft: color-mix(in srgb, var(--color-blue-dark) 14%, transparent);
 
     --background: var(--color-paper);
     --foreground: var(--color-ink);
@@ -44,12 +78,17 @@
   --color-paper: var(--color-paper);
   --color-ink: var(--color-ink);
   --color-slate: var(--color-slate);
-  --color-signet: var(--color-signet);
-  --color-signet-soft: var(--color-signet-soft);
-  --color-bloom: var(--color-bloom);
-  --color-bloom-soft: var(--color-bloom-soft);
+  --color-blue: var(--color-blue);
+  --color-blue-soft: var(--color-blue-soft);
+  --color-blue-dark: var(--color-blue-dark);
+  --color-blue-dark-soft: var(--color-blue-dark-soft);
   --color-mist: var(--color-mist);
   --color-error: var(--color-error);
+  --color-charcoal: var(--color-charcoal);
+  --color-ice: var(--color-ice);
+  --color-off-white: var(--color-off-white);
+  --color-white: var(--color-white);
+  --color-border-gray: var(--color-border-gray);
 
   --font-display: var(--font-display-raw), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-sans-raw), ui-sans-serif, system-ui, sans-serif;
@@ -62,14 +101,14 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Visible keyboard focus everywhere, using the primary accent — never suppressed. */
+/* Focus clavier visible partout, avec l'accent principal — jamais supprimé. */
 :focus-visible {
-  outline: 2px solid var(--color-signet);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* Shared, sober transition timing for hover/focus states site-wide. */
+/* Timing de transition partagé et sobre pour hover/focus, partout sur le site. */
 * {
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

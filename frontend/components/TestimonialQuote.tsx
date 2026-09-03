@@ -4,13 +4,13 @@ import type { Locale, Testimonial } from '@/lib/types';
 export function TestimonialQuote({
   testimonial,
   locale,
-  accent = 'signet',
+  accent = 'blue',
 }: {
   testimonial: Testimonial;
   locale: Locale;
   accent?: ProjectAccent;
 }) {
-  const accentText = accent === 'signet' ? 'text-signet' : 'text-bloom';
+  const accentText = accent === 'blue' ? 'text-blue' : 'text-blue-dark';
 
   return (
     <blockquote className="border-l-2 border-mist pl-5">
