@@ -18,8 +18,8 @@ export function FeaturedProjectShowcase({
 }) {
   const dictionary = getDictionary(locale);
   const accent = getProjectAccent(project);
-  const accentText = accent === 'signet' ? 'text-signet' : 'text-bloom';
-  const accentBorder = accent === 'signet' ? 'hover:border-signet' : 'hover:border-bloom';
+  const accentText = accent === 'blue' ? 'text-blue' : 'text-blue-dark';
+  const accentBorder = accent === 'blue' ? 'hover:border-blue' : 'hover:border-blue-dark';
 
   return (
     <article className="grid gap-6 sm:grid-cols-5 sm:gap-10">

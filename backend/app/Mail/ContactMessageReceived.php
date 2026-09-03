@@ -17,7 +17,7 @@ class ContactMessageReceived extends Mailable
 
     public function build(): self
     {
-        return $this->subject('Nouveau message — moi.bytechnum.com')
+        return $this->subject('Nouveau message : moi.bytechnum.com')
             ->view('emails.contact-message-received');
     }
 }

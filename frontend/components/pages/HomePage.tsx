@@ -8,9 +8,9 @@ import type { Locale, Project, Settings } from '@/lib/types';
 const COPY = {
   fr: {
     heroKicker: 'TECHNUM · Développeur full-stack · Bénin',
-    heroHeadline: "Je construis des applications qu'on peut auditer, pas juste qu'on peut démontrer.",
+    heroHeadline: "Des solutions numériques conçues pour vos réalités, du premier échange au déploiement.",
     heroBody:
-      "TECHNUM conçoit des applications web sur-mesure pour des clients institutionnels et privés en Afrique de l'Ouest : gestion, identité numérique, traçabilité, conformité APDP.",
+      "TECHNUM conçoit, sécurise et déploie des applications sur-mesure pour des clients institutionnels et privés en Afrique de l'Ouest, avec un accompagnement qui ne s'arrête pas à la livraison.",
     featuredHeading: 'Projets phares',
     methodHeading: 'Une méthode, pas juste du code',
     contactHref: '/contact',
@@ -20,9 +20,9 @@ const COPY = {
   },
   en: {
     heroKicker: 'TECHNUM · Full-stack developer · Benin',
-    heroHeadline: 'I build applications you can audit, not just ones you can demo.',
+    heroHeadline: 'Digital solutions built around your reality, from first conversation to deployment.',
     heroBody:
-      'TECHNUM builds custom web applications for institutional and private clients across West Africa: management systems, digital identity, traceability, data-protection compliance.',
+      "TECHNUM designs, secures, and deploys custom applications for institutional and private clients across West Africa, with support that doesn't stop at delivery.",
     featuredHeading: 'Featured projects',
     methodHeading: 'A method, not just code',
     contactHref: '/en/contact',
@@ -59,14 +59,14 @@ export function HomePage({
         <div className="mt-8 flex flex-wrap items-center gap-6">
           <Link
             href={copy.contactHref}
-            className="rounded-full bg-signet px-5 py-2.5 font-medium text-paper transition-opacity hover:opacity-90"
+            className="rounded-full bg-blue px-5 py-2.5 font-medium text-paper transition-opacity hover:opacity-90"
           >
             {dictionary.cta.contactMe}
           </Link>
           <p className="flex items-center gap-2 text-sm text-slate">
             <span
               aria-hidden="true"
-              className={`inline-block h-2 w-2 rounded-full ${settings.availableForWork ? 'bg-signet' : 'bg-slate'}`}
+              className={`inline-block h-2 w-2 rounded-full ${settings.availableForWork ? 'bg-blue' : 'bg-slate'}`}
             />
             {settings.availableForWork
               ? dictionary.footer.availableForWork
@@ -96,7 +96,7 @@ export function HomePage({
             />
           ))}
         </div>
-        <Link href={copy.projectsHref} className="mt-10 inline-block font-mono text-sm text-signet hover:underline">
+        <Link href={copy.projectsHref} className="mt-10 inline-block font-mono text-sm text-blue hover:underline">
           {copy.viewAllProjects}
         </Link>
       </section>
