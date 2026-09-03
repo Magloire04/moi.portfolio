@@ -46,7 +46,7 @@ export function Header({ locale }: { locale: Locale }) {
             width={451}
             height={120}
             priority
-            className="block h-6 w-auto [@media(prefers-color-scheme:dark)]:hidden"
+            className="block h-9 w-auto [@media(prefers-color-scheme:dark)]:hidden"
           />
           <Image
             src="/logo-dark.png"
@@ -54,7 +54,7 @@ export function Header({ locale }: { locale: Locale }) {
             width={451}
             height={120}
             priority
-            className="hidden h-6 w-auto [@media(prefers-color-scheme:dark)]:block"
+            className="hidden h-9 w-auto [@media(prefers-color-scheme:dark)]:block"
           />
         </Link>
 
@@ -77,14 +77,14 @@ export function Header({ locale }: { locale: Locale }) {
           <li>
             <Link
               href={hrefs.contact}
-              className="rounded-full border border-mist px-3 py-1 text-ink transition-colors hover:border-signet hover:text-signet"
+              className="rounded-full border border-mist px-3 py-1 text-ink transition-colors hover:border-blue hover:text-blue"
             >
               {dictionary.nav.contact}
             </Link>
           </li>
           <li aria-hidden="true" className="h-4 w-px bg-mist" />
           <li>
-            <Link href={alternateHref} className="text-ink transition-colors hover:text-signet">
+            <Link href={alternateHref} className="text-ink transition-colors hover:text-blue">
               {locale === 'fr' ? 'EN' : 'FR'}
             </Link>
           </li>

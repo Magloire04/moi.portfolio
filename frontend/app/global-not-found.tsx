@@ -11,8 +11,8 @@ export default function NotFound() {
           <h1 className="font-display text-2xl font-semibold">Page introuvable</h1>
           <p className="text-slate">La page que vous cherchez n&apos;existe pas ou plus.</p>
           <div className="mt-2 flex gap-6 font-mono text-sm">
-            <Link href="/" className="text-signet hover:underline">Retour à l&apos;accueil</Link>
-            <Link href="/en" className="text-signet hover:underline">English home</Link>
+            <Link href="/" className="text-blue hover:underline">Retour à l&apos;accueil</Link>
+            <Link href="/en" className="text-blue hover:underline">English home</Link>
           </div>
         </main>
       </body>

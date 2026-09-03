@@ -127,11 +127,11 @@ export function ContactForm({ locale }: { locale: Locale }) {
   }
 
   if (status === 'success') {
-    return <p role="status" className="text-lg text-signet">{copy.success}</p>;
+    return <p role="status" className="text-lg text-blue">{copy.success}</p>;
   }
 
   const fieldClassName =
-    'mt-1.5 w-full rounded-md border border-mist bg-transparent px-3 py-2 text-ink outline-none transition-colors focus:border-signet';
+    'mt-1.5 w-full rounded-md border border-mist bg-transparent px-3 py-2 text-ink outline-none transition-colors focus:border-blue';
   const labelClassName = 'block font-mono text-xs uppercase tracking-wide text-slate';
 
   return (
@@ -179,7 +179,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="rounded-full bg-signet px-5 py-2.5 font-medium text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="rounded-full bg-blue px-5 py-2.5 font-medium text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'submitting' ? copy.submitting : copy.submit}
       </button>

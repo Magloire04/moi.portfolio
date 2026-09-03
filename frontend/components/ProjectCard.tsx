@@ -14,7 +14,7 @@ export function ProjectCard({
   href: string;
 }) {
   const accent = getProjectAccent(project);
-  const accentBorder = accent === 'signet' ? 'hover:border-signet' : 'hover:border-bloom';
+  const accentBorder = accent === 'blue' ? 'hover:border-blue' : 'hover:border-blue-dark';
 
   return (
     <Link

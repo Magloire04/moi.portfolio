@@ -17,7 +17,7 @@ export function Footer({ locale }: { locale: Locale }) {
           href="https://github.com/Magloire04/moi.portfolio"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors hover:text-signet"
+          className="transition-colors hover:text-blue"
         >
           {SOURCE_LABEL[locale]} ↗
         </a>

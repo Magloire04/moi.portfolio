@@ -14,8 +14,8 @@ const SOURCE_LABEL = { fr: 'Code source', en: 'Source code' };
 export function ProjectDetailPage({ locale, project }: { locale: Locale; project: Project }) {
   const dictionary = getDictionary(locale);
   const accent = getProjectAccent(project);
-  const accentText = accent === 'signet' ? 'text-signet' : 'text-bloom';
-  const accentBg = accent === 'signet' ? 'bg-signet' : 'bg-bloom';
+  const accentText = accent === 'blue' ? 'text-blue' : 'text-blue-dark';
+  const accentBg = accent === 'blue' ? 'bg-blue' : 'bg-blue-dark';
   const projectsHref = locale === 'fr' ? '/projets' : '/en/projects';
 
   return (
