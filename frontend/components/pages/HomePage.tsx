@@ -12,7 +12,7 @@ const COPY = {
     heroBody:
       "TECHNUM conçoit, sécurise et déploie des applications sur-mesure pour des clients institutionnels et privés en Afrique de l'Ouest, avec un accompagnement qui ne s'arrête pas à la livraison.",
     featuredHeading: 'Projets phares',
-    methodHeading: 'Une méthode, pas juste du code',
+    methodHeading: 'La méthode derrière le code',
     contactHref: '/contact',
     projectsHref: '/projets',
     viewAllProjects: 'Voir tous les projets ↗',
@@ -24,7 +24,7 @@ const COPY = {
     heroBody:
       "TECHNUM designs, secures, and deploys custom applications for institutional and private clients across West Africa, with support that doesn't stop at delivery.",
     featuredHeading: 'Featured projects',
-    methodHeading: 'A method, not just code',
+    methodHeading: 'The method behind the code',
     contactHref: '/en/contact',
     projectsHref: '/en/projects',
     viewAllProjects: 'View all projects ↗',

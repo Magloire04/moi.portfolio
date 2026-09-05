@@ -23,6 +23,10 @@ export interface Dictionary {
     body: string;
     backHome: string;
   };
+  legal: {
+    privacyPolicy: string;
+    termsOfUse: string;
+  };
 }
 
 const dictionaries: Record<Locale, Dictionary> = {
@@ -49,6 +53,10 @@ const dictionaries: Record<Locale, Dictionary> = {
       body: "La page que vous cherchez n'existe pas ou plus.",
       backHome: "Retour à l'accueil",
     },
+    legal: {
+      privacyPolicy: 'Politique de confidentialité',
+      termsOfUse: "Conditions d'utilisation",
+    },
   },
   en: {
     nav: {
@@ -72,6 +80,10 @@ const dictionaries: Record<Locale, Dictionary> = {
       title: 'Page not found',
       body: "The page you're looking for doesn't exist.",
       backHome: 'Back to home',
+    },
+    legal: {
+      privacyPolicy: 'Privacy Policy',
+      termsOfUse: 'Terms of Use',
     },
   },
 };
