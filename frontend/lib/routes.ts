@@ -18,6 +18,8 @@ export const STATIC_PAGE_PATH_PAIRS = {
   projects: { fr: '/projets/', en: '/en/projects/' },
   about: { fr: '/a-propos/', en: '/en/about/' },
   contact: { fr: '/contact/', en: '/en/contact/' },
+  privacyPolicy: { fr: '/politique-de-confidentialite/', en: '/en/privacy-policy/' },
+  termsOfUse: { fr: '/conditions-generales-utilisation/', en: '/en/terms-of-use/' },
 } as const satisfies Record<string, { fr: string; en: string }>;
 
 /** The FR/EN path pair for a given project detail page, keyed by its shared slug. */
@@ -46,6 +48,8 @@ const FR_TO_EN_SEGMENT: Record<string, string> = {
   projets: 'projects',
   'a-propos': 'about',
   contact: 'contact',
+  'politique-de-confidentialite': 'privacy-policy',
+  'conditions-generales-utilisation': 'terms-of-use',
 };
 
 const EN_TO_FR_SEGMENT: Record<string, string> = {
@@ -53,6 +57,8 @@ const EN_TO_FR_SEGMENT: Record<string, string> = {
   projects: 'projets',
   about: 'a-propos',
   contact: 'contact',
+  'privacy-policy': 'politique-de-confidentialite',
+  'terms-of-use': 'conditions-generales-utilisation',
 };
 
 export function getAlternateHref(pathname: string, locale: Locale): string {

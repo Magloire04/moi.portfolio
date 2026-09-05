@@ -16,24 +16,24 @@ export const methodPoints: MethodPoint[] = [
     id: 'pr-workflow',
     title: { fr: 'Workflow par pull request, même en solo', en: 'Pull-request workflow, even solo' },
     body: {
-      fr: 'Chaque changement passe par une issue, une branche, une PR et une relecture, sur ce portfolio comme sur mes mandats clients. Ça laisse une trace de décision, pas seulement du code.',
-      en: 'Every change goes through an issue, a branch, a PR, and a review, on this portfolio the same as on client work. It leaves a decision trail, not just code.',
+      fr: 'Chaque changement passe par une issue, une branche, une PR et une relecture, sur ce portfolio comme sur mes mandats clients. Ça laisse une trace de décision, en plus du code.',
+      en: 'Every change goes through an issue, a branch, a PR, and a review, on this portfolio the same as on client work. It leaves a decision trail alongside the code.',
     },
   },
   {
     id: 'apdp',
     title: { fr: 'Conformité APDP citée explicitement', en: 'APDP compliance, explicitly cited' },
     body: {
-      fr: "La loi béninoise n°2017-20 sur la protection des données personnelles est nommée et appliquée dans plusieurs projets en production, pas traitée comme un détail administratif après coup.",
-      en: "Benin's data-protection law (n°2017-20, APDP) is named and applied across several production projects, not treated as an administrative afterthought.",
+      fr: "La loi béninoise n°2017-20 sur la protection des données personnelles est nommée et appliquée dès la conception dans plusieurs projets en production.",
+      en: "Benin's data-protection law (n°2017-20, APDP) is named and applied from the design stage onward across several production projects.",
     },
   },
   {
     id: 'real-crypto',
-    title: { fr: 'Cryptographie appliquée, pas décorative', en: 'Applied cryptography, not decorative' },
+    title: { fr: 'Cryptographie réellement appliquée', en: 'Cryptography, genuinely applied' },
     body: {
-      fr: 'Signatures ECDSA P-384 réelles pour des certificats vérifiables publiquement, JWT signés pour un PoC d\'identité numérique, Argon2id pour les mots de passe : la sécurité vit dans le code, pas dans une brochure.',
-      en: 'Real ECDSA P-384 signatures for publicly verifiable certificates, signed JWTs for a digital-identity PoC, Argon2id for passwords: security lives in the code, not in a brochure.',
+      fr: 'Signatures ECDSA P-384 réelles pour des certificats vérifiables publiquement, JWT signés pour un PoC d\'identité numérique, Argon2id pour les mots de passe : la sécurité vit dans le code.',
+      en: 'Real ECDSA P-384 signatures for publicly verifiable certificates, signed JWTs for a digital-identity PoC, Argon2id for passwords: security lives in the code.',
     },
   },
   {
