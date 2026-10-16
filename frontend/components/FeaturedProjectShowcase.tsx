@@ -5,8 +5,6 @@ import { getProjectAccent, getProjectKicker } from '@/lib/accent';
 import { getDictionary } from '@/content/i18n';
 import type { Locale, Project } from '@/lib/types';
 
-const SOURCE_LABEL = { fr: 'Code source', en: 'Source code' };
-
 export function FeaturedProjectShowcase({
   project,
   locale,
@@ -70,16 +68,6 @@ export function FeaturedProjectShowcase({
               className={`${accentText} hover:underline`}
             >
               {dictionary.cta.liveDemo} ↗
-            </a>
-          )}
-          {project.repoUrl && (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate hover:text-ink hover:underline"
-            >
-              {SOURCE_LABEL[locale]} ↗
             </a>
           )}
         </div>

@@ -9,7 +9,6 @@ import type { Locale, Project } from '@/lib/types';
 const CLIENT_LABEL = { fr: 'Client', en: 'Client' };
 const ROLE_LABEL = { fr: 'Rôle', en: 'Role' };
 const BACK_LABEL = { fr: '← Tous les projets', en: '← All projects' };
-const SOURCE_LABEL = { fr: 'Code source', en: 'Source code' };
 
 export function ProjectDetailPage({ locale, project }: { locale: Locale; project: Project }) {
   const dictionary = getDictionary(locale);
@@ -63,16 +62,6 @@ export function ProjectDetailPage({ locale, project }: { locale: Locale; project
               className={`rounded-full px-5 py-2.5 text-sm font-medium text-paper transition-opacity hover:opacity-90 ${accentBg}`}
             >
               {dictionary.cta.liveDemo} ↗
-            </a>
-          )}
-          {project.repoUrl && (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-mist px-5 py-2.5 text-sm font-medium transition-colors hover:border-ink"
-            >
-              {SOURCE_LABEL[locale]} ↗
             </a>
           )}
         </div>
