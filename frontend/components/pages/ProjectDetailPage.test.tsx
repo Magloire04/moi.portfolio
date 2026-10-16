@@ -66,4 +66,11 @@ describe('ProjectDetailPage', () => {
 
     expect(screen.getByText('CAFAB')).toBeInTheDocument();
   });
+
+  it('never renders a GitHub repository link, even when repoUrl is present', () => {
+    render(<ProjectDetailPage locale="fr" project={namedClientProject} />);
+
+    expect(screen.queryByRole('link', { name: /code source/i })).not.toBeInTheDocument();
+    expect(screen.queryByText(/github\.com/i)).not.toBeInTheDocument();
+  });
 });
