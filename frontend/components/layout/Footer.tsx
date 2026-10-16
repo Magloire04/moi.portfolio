@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { getDictionary } from '@/content/i18n';
 import type { Locale } from '@/lib/types';
 
-const SOURCE_LABEL = { fr: 'Code source', en: 'Source code' };
-
 const FR_LEGAL_HREFS = { privacyPolicy: '/politique-de-confidentialite', termsOfUse: '/conditions-generales-utilisation' };
 const EN_LEGAL_HREFS = { privacyPolicy: '/en/privacy-policy', termsOfUse: '/en/terms-of-use' };
 
@@ -25,14 +23,6 @@ export function Footer({ locale }: { locale: Locale }) {
           <Link href={legalHrefs.termsOfUse} className="transition-colors hover:text-blue">
             {dictionary.legal.termsOfUse}
           </Link>
-          <a
-            href="https://github.com/Magloire04/moi.portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-blue"
-          >
-            {SOURCE_LABEL[locale]} ↗
-          </a>
         </nav>
       </div>
     </footer>
