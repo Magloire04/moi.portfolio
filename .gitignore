@@ -3,3 +3,4 @@
 
 # Documentation interne (guides de déploiement, etc.) : jamais commitée, ce dépôt est public
 documentations/
+.claude-flow/
